@@ -1,7 +1,4 @@
-
-
 const firebaseAdmin = require("firebase-admin");
-
 
 const createAccountHandler = async (request, h) => {
     try {
