@@ -2,7 +2,7 @@ const { getAllSibiAlphabet,getAllSibiWords} = require('../handlers/sibiHandler')
 
 const getSibiAlphabet = async (request, h) => {
     try {
-        const signedUrl = await getAllSibiAlphabet('bwwaaaaajinggaannn', 'image');
+        const signedUrl = await getAllSibiAlphabet('sibipedia-resources', 'alphabet-png');
         return h.response({ signedUrl }).code(200);
     } catch (err) {
         console.error('Error:', err);
@@ -12,7 +12,7 @@ const getSibiAlphabet = async (request, h) => {
 
 const getSibiWords = async (request, h) => {
     try {
-        const signedUrl = await getAllSibiWords('bwwaaaaajinggaannn', 'words');
+        const signedUrl = await getAllSibiWords('sibipedia-resources', 'words-png');
         return h.response({ signedUrl }).code(200);
     } catch (err) {
         console.error('Error:', err);
