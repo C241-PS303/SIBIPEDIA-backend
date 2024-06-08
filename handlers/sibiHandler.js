@@ -1,6 +1,3 @@
-
-const { Storage } = require('@google-cloud/storage');
-require('dotenv').config()
 const storage = require('../config/storage');
 
 const getAllSibiAlphabet = async (bucketName, folderName) => {
@@ -11,7 +8,7 @@ const getAllSibiAlphabet = async (bucketName, folderName) => {
     });
 
     const signedUrls = [];
-    const validExtensions = ['.png', '.jpg', '.jpeg', '.gif']; // Daftar ekstensi gambar yang valid
+    const validExtensions = ['.png', '.jpg', '.jpeg', '.gif']; 
 
     console.log(`Found files in ${folderName}:`, files.map(file => file.name));
 
