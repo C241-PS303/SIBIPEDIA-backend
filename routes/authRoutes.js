@@ -1,4 +1,4 @@
-const { createAccount,userLogin } = require('../controllers/authController');
+const { createAccount, auth} = require('../controllers/authController');
 
 const routes = [
     {
@@ -8,11 +8,12 @@ const routes = [
         
     },
     {
-        method: 'GET',
-        path: '/login',
-        handler: userLogin
+        method: 'POST',
+        path: '/auth',
+        handler: auth
         
-    }
+    },
+
 ];
 
 module.exports = routes;
