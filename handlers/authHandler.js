@@ -1,5 +1,6 @@
 const firebaseAdmin = require("firebase-admin");
 
+
 const createAccountHandler = async (request, h) => {
     try {
         const { email, password, displayName, phoneNumber } = request.payload;
