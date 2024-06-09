@@ -1,9 +1,11 @@
 const { Storage } = require('@google-cloud/storage');
-require('dotenv').config()
+
+const hardcodedCredentials = {
+    
+};
 
 const storage = new Storage({
-  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS, 
- 
+  credentials: hardcodedCredentials,
 });
 
 module.exports = storage;
