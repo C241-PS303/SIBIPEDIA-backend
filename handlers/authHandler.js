@@ -42,19 +42,31 @@ const createAccountHandler = async (request, h) => {
         }
 
         // Validasi email terdaftar
-        const existingUser = await firebaseAdmin.auth().getUserByEmail(email).catch(error => {
+        const existingUserByEmail = await firebaseAdmin.auth().getUserByEmail(email).catch(error => {
             if (error.code !== 'auth/user-not-found') {
                 throw error;
             }
             return null;
         });
 
-        if (existingUser) {
+        if (existingUserByEmail) {
             errors.push('Email sudah terdaftar');
         }
 
+        // Validasi nomor telepon terdaftar
+        const existingUserByPhoneNumber = await firebaseAdmin.auth().getUserByPhoneNumber(phoneNumber).catch(error => {
+            if (error.code !== 'auth/user-not-found') {
+                throw error;
+            }
+            return null;
+        });
+
+        if (existingUserByPhoneNumber) {
+            errors.push('Nomor telepon sudah terdaftar');
+        }
+
         if (errors.length > 0) {
-            return h.response({ message: 'Validasi error', errors }).code(400);
+            return h.response({ message: 'Validasi Error', errors }).code(400);
         }
 
         const userCredential = await firebaseAdmin.auth().createUser({ email, password, displayName, phoneNumber });
