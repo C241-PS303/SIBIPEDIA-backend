@@ -15,8 +15,15 @@ const routes = [
     },
     {
         method: 'GET',
-        path: '/profile/{id}',
-        handler: getProfile
+        path: '/profile',
+        handler: async (request, h) => {
+            const authResponse = await auth(request, h);
+            if (authResponse.statusCode === 200) {
+                return getProfile(request, h);
+            } else {
+                return authResponse;
+            }
+        }
     }
 
 ];
