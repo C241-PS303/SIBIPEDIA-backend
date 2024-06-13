@@ -1,13 +1,13 @@
 const Hapi = require('@hapi/hapi');
 
 
-const sibiRoutes = require('./routes/sibiRoutes'); //testing
+const sibiRoutes = require('./routes/sibiRoutes'); 
 const authRoutes = require('./routes/authRoutes');
 
 
 const init = async () => {
     const server = Hapi.server({
-        port: 3000,
+        port: 3002,
         host: 'localhost',
         routes: {
             cors: {
