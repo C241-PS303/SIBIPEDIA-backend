@@ -1,4 +1,4 @@
-const { createAccount, auth} = require('../controllers/authController');
+const { createAccount, auth, getProfile} = require('../controllers/authController');
 
 const routes = [
     {
@@ -13,6 +13,11 @@ const routes = [
         handler: auth
         
     },
+    {
+        method: 'GET',
+        path: '/profile/{id}',
+        handler: getProfile
+    }
 
 ];
 

@@ -2,7 +2,6 @@ const firebaseAdmin = require("firebase-admin");
 const validator = require("validator");
 
 const serviceAccount = {
-    
 };
 
 firebaseAdmin.initializeApp({
@@ -118,4 +117,31 @@ const verifyTokenHandler = async (request, h) => {
     }
 };
 
-module.exports = { createAccountHandler, verifyTokenHandler };
+const getUserProfileHandler = async (request, h) => {
+    try {
+        const { id } = request.params;
+
+        const userRecord = await firebaseAdmin.auth().getUser(id);
+
+        const userData = {
+            displayName: userRecord.displayName,
+            email: userRecord.email,
+            phoneNumber: userRecord.phoneNumber
+        };
+
+        return h.response({
+            status: 200,
+            message: 'User credentials retrieved successfully',
+            userData
+        }).code(200);
+    } catch (error) {
+        if (error.code === 'auth/user-not-found') {
+            return h.response({ message: 'User not found' }).code(404);
+        }
+        console.error('Error retrieving user credentials:', error.message);
+        return h.response({ message: 'Error retrieving user credentials' }).code(500);
+    }
+};
+
+
+module.exports = { createAccountHandler, verifyTokenHandler, getUserProfileHandler };
