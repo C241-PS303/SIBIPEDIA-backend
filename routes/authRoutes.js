@@ -1,4 +1,4 @@
-const { createAccount, auth} = require('../controllers/authController');
+const { createAccount, auth, getProfile} = require('../controllers/authController');
 
 const routes = [
     {
@@ -13,6 +13,18 @@ const routes = [
         handler: auth
         
     },
+    {
+        method: 'GET',
+        path: '/profile',
+        handler: async (request, h) => {
+            const authResponse = await auth(request, h);
+            if (authResponse.statusCode === 200) {
+                return getProfile(request, h);
+            } else {
+                return authResponse;
+            }
+        }
+    }
 
 ];
 
