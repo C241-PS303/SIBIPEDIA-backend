@@ -1,13 +1,7 @@
-const firebaseAdmin = require("firebase-admin");
+const firebaseAdmin = require('../config/firebase')
 const validator = require("validator");
 
-const serviceAccount = {
-  
-};
 
-firebaseAdmin.initializeApp({
-    credential: firebaseAdmin.credential.cert(serviceAccount),
-});
 
 const createAccountHandler = async (request, h) => {
     try {
@@ -72,12 +66,8 @@ const createAccountHandler = async (request, h) => {
         const userCredential = await firebaseAdmin.auth().createUser({ email, password, displayName, phoneNumber });
 
         if (userCredential && userCredential.uid) {
-            const uid = userCredential.uid;
-            console.log('User created:', uid);
-            const customToken = await firebaseAdmin.auth().createCustomToken(uid, { expiresIn: '24h' });
-            console.log(customToken);
             console.log(userCredential);
-            return { userCredential, customToken };
+            return { userCredential,  };
         } else {
             console.error('Error creating account: User data not found in userCredential');
             return { userCredential, customToken: null };

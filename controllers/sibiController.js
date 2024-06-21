@@ -20,6 +20,7 @@ const getSibiWords = async (request, h) => {
     }
 };
 
+
 module.exports = {
     getSibiAlphabet,
     getSibiWords
