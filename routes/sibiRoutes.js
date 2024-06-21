@@ -1,9 +1,9 @@
-const { getSibiAlphabet, getSibiWords } = require('../controllers/sibiController');
+const { getSibiAlphabet, getSibiWords} = require('../controllers/sibiController');
 const {auth} = require('../controllers/authController'); 
 const routes = [
     {
         method: 'GET',
-        path: '/sibi-alphabet',
+        path: '/sibi/alphabet',
         handler: async (request, h) => {
             const authResponse = await auth(request, h);
             if (authResponse.statusCode === 200) {
@@ -15,7 +15,7 @@ const routes = [
     },
     {
         method: 'GET',
-        path: '/sibi-words',
+        path: '/sibi/words',
         handler: async (request, h) => {
             const authResponse = await auth(request, h);
             if (authResponse.statusCode === 200) {
@@ -25,6 +25,7 @@ const routes = [
             }
         }
     }
+    
 ];
 
 module.exports = routes;
